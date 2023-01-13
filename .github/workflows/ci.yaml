@@ -8,19 +8,13 @@ env:
 
 jobs:
   test:
-    name: Unit testing
+    name: Test
     runs-on: ubuntu-latest
     container: node:16-alpine
     steps:
       - uses: actions/checkout@v3
       - name: Create coverage report dir
         run: mkdir -p coverage-reports
-      - name: Cache yarn dependencies
-        uses: actions/cache@v3
-        with:
-          path: '**/node_modules'
-          key: v1-yarn-deps-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: v1-yarn-deps-
       - name: Set up yarn tests
         run: yarn install --frozen-lockfile
       - name: Run yarn linter
